@@ -1123,8 +1123,8 @@ color: white;
          email=document.getElementById("email");
          full_name_field=document.getElementById("full_name_field");
   user_id_field=document.getElementById("user_id_field");
-   confirm_password_field=document.getElementById("confirm_password_field");
-   password_field=document.getElementById("password_field");
+   confirm_password=document.getElementById("confirm_password_field");
+   password=document.getElementById("password_field");
   college=document.getElementById("college");
   city=document.getElementById("city");
         
@@ -1135,10 +1135,10 @@ color: white;
         full_name_field.value="<%= user.full_name%>";
         user_id_field.value="<%= user.user_id%>";
         //make password or confirm password to text type
-        password_field.type="text";
-        confirm_password_field.type="text";
-        password_field.value="<%= user.password%>";
-        confirm_password_field="<%= user.password%>";
+        password.type="text";
+        confirm_password.type="text";
+        password.value="<%= user.password%>";
+        confirm_password.value="<%= user.password%>";
       city.value="<%= user.city%>";
       college.value="<%= user.city%>"
        
@@ -1166,8 +1166,8 @@ color: white;
            email=document.getElementById("email");
            full_name_field=document.getElementById("full_name_field");
     user_id_field=document.getElementById("user_id_field");
-     confirm_password_field=document.getElementById("confirm_password_field");
-     password_field=document.getElementById("password_field");
+     confirm_password=document.getElementById("confirm_password_field");
+     password=document.getElementById("password_field");
     college=document.getElementById("college");
     city=document.getElementById("city");
           
@@ -1178,10 +1178,10 @@ color: white;
           full_name_field.value="<%= user.full_name%>";
           user_id_field.value="<%= user.user_id%>";
           //make password or confirm password to text type
-          password_field.type="text";
+          password.type="text";
           confirm_password_field.type="text";
-          password_field.value="<%= user.password%>";
-          confirm_password_field="<%= user.password%>";
+          password.value="<%= user.password%>";
+          confirm_password.value="<%= user.password%>";
         city.value="<%= user.city%>";
         college.value="<%= user.city%>"
          
@@ -1219,14 +1219,18 @@ const button=document.getElementById("button");
 
   //password icon to show hide the password
   let password=document.getElementById("password_field");
+  let confirm_password=document.getElementById("confirm_password_field");
+
   let password_icon=document.getElementById("password_icon");
    password_icon.addEventListener("click",()=>{
      if(password.type=="password"){password.type="text";  password_icon.classList.remove("fa-eye-slash"); password_icon.classList.add("fa-eye");   }
       else{password.type="password"; password_icon.classList.add("fa-eye-slash");   password_icon.classList.remove("fa-eye");  } });
 
+      
+      let confirm_password_icon=document.getElementById("confirm_password_icon");
+
 const user_id_field=document.getElementById("user_id_field");
-      let confirm_password=document.getElementById("confirm_password_field");
-      let confirm_password_icon=document.getElementById("confirm_password_icon")
+      
    confirm_password_icon.addEventListener("click",()=>{
      if(confirm_password.type=="password"){confirm_password.type="text";  confirm_password_icon.classList.remove("fa-eye-slash"); confirm_password_icon.classList.add("fa-eye");   }
       else{confirm_password.type="password"; confirm_password_icon.classList.add("fa-eye-slash");   confirm_password_icon.classList.remove("fa-eye");  } });
@@ -1254,13 +1258,15 @@ const ValidateEmail=((mail)=>
   
     return false;
 });
-const ValidatePassword=((password)=>{
-if(password.length>5 && password.length<13){   //must be 6-12
-return true;
-}
-  return false;
-   //must be 3 digit long 
-});
+const ValidatePassword = (password) => {
+  if (password && password.length > 5 && password.length < 13) {
+    // password is valid
+    return true;
+  } else {
+    // password is invalid
+    return false;
+  }
+};
 
 
 const cityValidate=((city)=>{
@@ -1309,12 +1315,12 @@ if(ValidateUserId(user_id_field.value)){
     user_id_field.style.border="2px solid #d3d5d8" ;
     if(ValidateEmail(email.value)){
         email.style.border="2px solid #d3d5d8" ;
-    if(ValidatePassword(password_field.value)){
-        password_field.style.border="2px solid #d3d5d8" ;
-        if(ValidatePassword(confirm_password_field.value)){
-           confirm_password_field.style.border="2px solid #d3d5d8" ;
-          if(confirm_password_field.value==password_field.value){
-            confirm_password_field.style.border="2px solid #d3d5d8" ;
+    if(ValidatePassword(password.value)){
+        password.style.border="2px solid #d3d5d8" ;
+        if(ValidatePassword(confirm_password.value)){
+           confirm_password.style.border="2px solid #d3d5d8" ;
+          if(confirm_password.value==password.value){
+            confirm_password.style.border="2px solid #d3d5d8" ;
 
 
             password_field.style.border="2px solid #d3d5d8" ;
@@ -1337,18 +1343,18 @@ if(ValidateUserId(user_id_field.value)){
           }
             //make button as type submit 
 else{
-    confirm_password_field.style.border="3px solid #FF9494";
-    password_field.style.border="3px solid #FF9494";
+    confirm_password.style.border="3px solid #FF9494";
+    password.style.border="3px solid #FF9494";
     //border: 3px solid indianred
     alert("Check confirm password");
 }
         }
         else{
-            confirm_password_field.style.border="1px solid #FF9494";
+            confirm_password.style.border="1px solid #FF9494";
         alert("confirm password should be 6 digit long");
     }
     }else{
-        password_field.style.border="1px solid #FF9494"; 
+        password.style.border="1px solid #FF9494"; 
         alert("password should be 6 digit long");
     }
           
@@ -1383,7 +1389,7 @@ full_name_field.addEventListener("keypress",((e)=>{ if(e.keyCode>64 && e.keyCode
 
 
     full_name_field.addEventListener("keypress",(e)=>{if(e.keyCode==32 && full_name_field.value==""){ e.preventDefault();  return false;}});
-password_field.addEventListener("keypress",(e)=>{if(e.keyCode==32){
+password.addEventListener("keypress",(e)=>{if(e.keyCode==32){
   e.preventDefault();
   return false;
 }});
