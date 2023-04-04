@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=0.6">
+  
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat app</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="./node_modules/cropperjs/dist/cropper.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+   html,body
+{
+
+
+  /* for small texs
+
+  font-family: 'Lato', sans-serif;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Open Sans', sans-serif;
+font-family: 'Roboto', sans-serif;
+
+
+
+for medium
+font-family: 'Merriweather', serif;
+font-family: 'Playfair Display', serif;
+font-family: 'PT Serif', serif;
+font-family: 'Source Serif Pro', serif;
+
+
+
+for logo
+font-family: 'Bebas Neue', cursive;
+font-family: 'Montserrat Alternates', sans-serif;
+font-family: 'Oswald', sans-serif;
+font-family: 'Raleway', sans-serif;
+ */
+
+
+
+
+
+
+
+
+  background: rgb(22, 162, 205);
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+}
+    .row{
+      margin: 0;
+      
+    }
+    .chat-header{
+      background-color: rgb(25,162,204);
+      height: 5rem;
+
+    }
+    .chat-header ul{
+  padding: 0;
+
+    }
+    .chat-header li{
+    display: inline-block;
+    font-size: 1.2rem;
+    color: white;
+    margin-left: 1.2rem;
+    margin-top: 0.3rem;
+    font-family: Arial, Helvetica, sans-serif;
+   
+    }
+   
+
+    .chat-header-2{
+      background-color: rgb(25,162,204);
+      height: 5rem;
+    }
+    #inside-chat-header-2{
+      width:100%; height: 4rem; padding: 0.5rem; 
+    }
+    
+    .chat-header-2 h4{
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    margin-left: 1.2rem;
+    margin-top: 0.5rem;
+    font-family: serif;
+   
+    }
+    .under-btn{
+      display: flex;
+    width: 100%;
+    background: rgb(21,162,205);
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    font-size:2.2rem;
+    }
+.outer-chat{
+  height: 5.5rem;
+    background-color: rgb(25,162,204);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 1rem;
+    padding-left: 1rem;
+}
+
+.group-icon i{
+  margin-right: 1rem;
+  color: white;
+  font-size: 1.4rem;
+}
+.profile-name{
+  display: inline-block;
+  font-family:serif;
+  color: white;
+  font-weight: 600;
+  margin: 0;
+
+}
+.your-profile-img{
+border-radius: 50%;
+width: 4.5rem;
+height: 4.5rem;
+border: 1px solid white;
+margin: -3px;
+
+}
+
+
+.profile-img{
+border-radius: 50%;
+min-width: 3.5rem;
+height: 3.5rem;
+border: 1px solid white;
+display: inline-block;
+
+}
+
+.specific-chat{
+ 
+  padding: 0;
+  
+}
+.list{
+  padding: 0;
+  border-right: 1px solid white;
+}
+#all-chats{
+    border-radius: 1rem;
+    border-top-right-radius: 0;
+    height: 40.7rem;
+    border-top-left-radius: 0;
+    margin: 0;
+  
+  
+}
+#all-chats::-webkit-scrollbar{
+    display: none;
+  }
+  #all-group-chats{
+    border-radius: 1rem;
+    border-top-right-radius: 0;
+    height: 40.7rem;
+    border-top-left-radius: 0;
+    margin: 0;
+    display: none;
+    flex-direction: column;
+  
+  
+}
+  #all-group-chats::-webkit-scrollbar{
+    display: none;
+  }
+
+  .overchatbtn{
+    border: none;
+     width: 100%; 
+    outline: none; 
+    text-align: left;
+    background-color: none;
+    height: 5.5rem;
+  }
+
+
+#column2{
+  display: none;
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+#all {
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+    font-family: 'Roboto', sans-serif;
+
+}
+section.chat__section {
+    width: 50rem;
+   height: 27rem;
+    background:#166697;
+}
+.message__area{
+  padding: 1rem 1rem;
+    height: 36rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    background-color: #166697;
+
+    background: white;
+    /* border: 5px solid black; */
+    border-top: 5px solid rgb(25,162,204);
+    padding-top: 5px;
+    /* margin-top: 0px; */
+    border-right: 5px solid rgb(25,162,204);
+    border-left: 5px solid rgb(25,162,204);
+    height: 82vh;
+    
+}
+.message__area::-webkit-scrollbar{
+  display: none;
+}
+#textarea-div{
+  height: 2.5rem;
+  
+}
+#textarea {
+    width: 100%;
+    border: none;
+    padding: 22px;
+    font-size: 16px;
+    outline: none;
+    background: #FBFBFB;
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+   
+
+  
+    height: 72px;
+    position: relative;
+    bottom: 0px;
+
+
+}
+
+.message {
+    padding: 20px; 
+    border-radius: 4px; 
+    margin-bottom: 40px;
+    max-width: 300px;
+    position: relative;
+}
+.incoming {
+    background: rgb(22, 162, 205);
+    color: white;  
+    padding: auto;
+}
+.outgoing {
+    background: rgb(22, 162, 205);
+    color:white;
+    margin-left: auto;
+}
+.message h4 {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    color: #333;
+    font-size: 14px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.main-body {
+  padding: 15px;
+}
+.card {
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+}
+ 
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 0 solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1rem;
+}
+
+
+
+.shadow-none {
+  box-shadow: none!important;
+}
+
+
+
+
+
+
+
+.f-icon{
+  font-size:1.8rem;
+  text-decoration: none;
+}
+
+
+.copyright{
+  text-decoration: none;
+}
+.my-5{
+margin: 0;
+}
+.footer-features a{
+text-decoration: none;
+
+}
+
+
+
+.card-box {
+padding: 2px;
+border-radius: 1rem;
+margin-bottom: 3px;
+background-color: #fff;
+border: 0.5rem solid black;
+}
+
+
+
+.content h4 {
+line-height: 10px;
+font-size: 12px;
+}
+
+
+.chellenges-profile-container{
+overflow: auto;
+white-space: nowrap;
+width: 100%;
+padding: 1rem;
+
+}
+.chellenges-profile-container::-webkit-scrollbar {
+  display: none;
+}
+
+
+.pbox{
+  display: inline-block;
+  width: 15rem;
+  height: 15rem;
+  margin: 0.5rem;
+}
+
+
+
+.pimgdiv{
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  width: 3rem;
+  height:3rem;
+ margin-bottom: 1rem;
+}
+.pimg{
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+}
+/* .creategroup,.groupname{
+  margin-left: 93%;
+} */
+
+
+
+
+
+#chat_group{
+    display: flex;
+    font-size: 1.4rem;
+    font-weight: 600;
+    background: rgb(25,162,204);
+    color: white;
+    border-top: 2px solid white;
+    height: 3rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    
+}
+#chat_text{
+    cursor: pointer;
+    font-size: 2.1rem;
+    height: 42px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(25,162,204);
+    padding: 0px 29px;
+}
+
+
+#community_text{
+    cursor: pointer;
+    padding: 0 4px;
+    font-size: 2.1rem;
+
+    height: 42px;
+    text-align: center;
+    display: flex;
+    background: rgb(25,162,204);
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+#search_tgl{
+  
+    display: flex;
+    gap: 13px;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+#search{
+        cursor: pointer;
+    color: white;
+    font-size: 13px;
+    width: 23px;
+
+
+    }
+
+    #search_tgl button{
+        border: none;
+    width: 27px;
+    }
+
+    #search_tgl i{
+        color: white;
+    font-size: 27px;
+    }
+    #ul_chat{
+        margin-bottom: 0px;
+        padding: 0%;
+    }
+    #logo{
+      font-size: 2rem;
+      color: white;
+    }
+    #image_container{
+      padding-top: 1.3rem;
+    padding-left: 1%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    align-items: center;
+    }
+
+    #plus, #community {
+      cursor: pointer;
+    }
+    #three-dot-content{
+      display: flex;
+      flex-direction: column;
+    }
+
+  </style>
+
+  <style>
+   @media only screen and 
+(min-width:750px ){
+body{
+  background: rgb(25,162,205);
+}
+    .ravi{
+
+    }
+    #image_container{padding-top: 1rem;}
+    
+    #logo{
+      font-size: 2.8rem;
+
+    }
+    #column2{
+      background: white;
+    height: 100vh;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+    }
+
+    #chat-section{
+      width: 100%;
+    }
+    #left-flex{
+      display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    width: 100%;
+    border-right: 3px solid black;
+    }
+    #flex-row{
+      display: flex;
+    flex-direction: row;
+    height: 100%;
+    }
+    .chat-header-2{
+      border-bottom: 3px solid black;
+      height: 83px;
+      background-color: rgb(25,162,204);
+    }
+    .message__area{
+      border: 2px solid white;
+    }
+  }
+    
+  </style>
+  <style>#profile{
+    gap: 5.5%;
+    display: flex;
+    
+    justify-content: center;
+    width:100%;
+    background-color: white;
+    
+    flex-direction: column;
+   align-content: center;
+   flex-wrap: wrap;
+   padding-right: 0.5rem;
+   padding-left: 0.5rem;
+ 
+ 
+ }
+ #profiless{
+   display: flex;
+     justify-content: space-between;
+     align-items: center;
+     width: 100%;
+     background-color: rgb(25,162,204);
+     padding-top: 1rem;
+     padding-bottom: 1rem;
+     border-radius: 5px;
+     margin-top: 1rem;
+     margin-bottom: 1rem;
+ 
+ 
+ }
+ #main_content{
+   min-width: 14rem;
+   max-width: 14rem;
+     display: flex;
+     flex-direction: column;
+     align-items: flex-start;
+     justify-content: center;
+     
+     padding-left: 3px;
+ }
+ 
+ #image-div{
+ 
+ 
+ 
+ height: 7rem;
+   width: 7rem;
+   border: 5px solid white;
+   text-align: center;
+   display: flex;
+   border-radius: 50%;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: space-evenly;
+ 
+ 
+ }
+ 
+ #image-div img{
+ width: 6.5rem;
+   height: 6.5rem;
+   border-radius: 50%;
+ }
+ #button-div button{
+ background-color: white;
+ color:black;
+ width: 9rem;
+ height: 3rem;
+ font-size: 1.1rem;
+ font-weight: 600;
+ }
+ 
+ #details-div{
+ font-size: 1.3rem;
+ 
+ }
+ 
+ #icon{
+ 
+ 
+ 
+ display: block;
+     display: flex;
+     margin-top: -9%;
+ }
+ 
+ 
+ 
+ @media only screen and 
+ (min-width:800px ){
+   #main_content{
+   display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-content: stretch;
+     align-items: flex-start;
+     min-height: 9rem;
+     max-width: 26rem;
+     min-width: 26rem;
+ }
+ #profiless{
+   gap: 3rem;
+   display: flex;
+     gap: 3rem;
+     flex-direction: row;
+     justify-content: center;
+ }
+ }
+ </style>
+</head>
+
+<body class="vsc-initialized" data-new-gr-c-s-check-loaded="14.1101.0" data-gr-ext-installed="">
+  
+
+  <div id="main-row" class="">
+    
+     
+      <div id="flex-row"> 
+<div  id="left-flex">
+  <div class="chat-header" style="
+  height: 5rem;
+">
+  <nav style="font-family: serif;" class="">
+      <div class="">
+        <div id="image_container">
+          <div>
+     <h3 id="logo">Campus Tree</h3>
+    </div>
+     <div id="search_tgl">
+
+
+      <div id="search" class="creategroup">
+          <i class="fa fa-search search" aria-hidden="true"></i>
+        </div>
+
+
+        <button id="three-dot" style="border: none; background: none; "  type="button"  aria-controls="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class=""><i class="fa-solid fa-ellipsis-vertical" style=""></i></span>
+        </button>
+  </div>
+
+        </div>
+          
+
+          
+        <div class="" id="nav-toggle" style="display: none;">
+
+          <div id="three-dot-content">
+              <li id="plus" value="ravi.sinhmar28@gmail.com" name="Ravi">
+                  <i class="fa fa-plus-square plus" aria-hidden="true"></i> <span>  Chat</span>
+                </li>
+                <li id="community">
+                  <i class="fa fa-users" aria-hidden="true"></i><span>  Community</span>
+            
+                </li>
+               
+          </div>
+        </div> 
+       
+      </div>
+    </nav>
+    </div>
+      <div id="chat_group">
+        
+            <div id="chat_text">
+                Chat
+            </div>
+            <div id="community_text">
+                Community
+            </div>
+        
+      </div>
+    <div id="all-chats" style="">
+  <!--fetch-->
+    </div>
+    <div id="all-group-chats" style="">
+    <!--fetch-->
+    </div>
+  </div>
+    
+    <div id="column2" class="specific-chat form" style="
+    background: white; 
+">
+      <div class="chat-header-2" style="
+   
+   
+">
+        <div  id="inside-chat-header-2" style="">
+          <ul id="ul_chat">
+           <img class="your-profile-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzHQv_th9wq3ivQ1CVk7UZRxhbPq64oQrg5Q&amp;usqp=CAU" alt="">
+            <h4 class="your-profile-name">Ravi Sinhmar</h4>
+          </ul>
+           </div>
+        </div>
+        
+         
+          <div class="message__area" style="
+   
+"></div>
+         
+              <textarea id="textarea" cols="30" rows="1" placeholder="Write a message..." style=";height: 72px;"></textarea>
+        
+      
+   
+    </div>
+
+  </div>
+  </div>
+ 
+
+      <div id="chat-community-div"> 
+        <div id="out-profile" style="
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        width: 100%;
+        background: rgb;
+        background: none;
+        height: -23rem;
+        align-items: center;
+    ">
+        <div id="group-input-div" style="
+        width: 100%;
+        display: none;
+
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: nowrap;
+    ">
+          <input id="community-name" type="text" placeholder="Community Name" style="
+        /* width: 141%; */
+        width: 79%;
+        height: 2rem;
+        border-radius: 3px;
+        font-size: 1.2rem;
+        padding-left: 1rem;
+    "><div style="
+        /* width: 100%; */
+        /* height: 3rem; */
+        width: 54%;
+    ">
+            <button id="create-community" type="button" style="
+        height: 2rem;
+        /* width: 110%; */
+        /* padding: 0 1rem; */
+        border-radius: 3px;
+        width: 100%;
+    ">Create Community</button>
+        </div>
+        
+        </div>
+      <div id="profile">
+    
+      </div>
+    </div>
+
+        <div id="profile">
+  
+        </div>
+
+      </div>
+   
+
+
+
+<!-- Start of chellenges Profile Recomendations -->
+
+</body>
+
+    <script src="https://kit.fontawesome.com/1b26aa43df.js" crossorigin="anonymous"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/client.js" ></script>
+ 
+</html>

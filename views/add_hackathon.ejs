@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+    <title>Team Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: rgb(25, 162, 205);
+        font-family: Arial, sans-serif;
+      }
+      textarea {
+     
+}
+
+      .container {
+        width: 50%;
+        margin: 5% auto 0;
+        background-color: white;
+        padding: 30px;
+        text-align: center;
+        border-radius: 10px;
+      }
+
+      h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      label {
+        font-size: 20px;
+        margin-bottom: 10px;
+        display: block;
+        text-align: left;
+        width: 100%;
+      }
+
+      textarea,
+      input[type="text"] {
+        font-size: 16px;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        width: 100%;
+        box-sizing: border-box;
+        border: 3px solid rgb(25,162,205);
+    margin: 16px;
+  padding: 5px;
+  box-sizing: border-box;
+
+  margin-top: 1%
+      }
+
+      textarea {
+        height: 100px;
+        max-width: 100%;
+        max-height: 200px;
+      }
+
+      input[type="button"] {
+        background-color: rgb(25, 162, 205);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 20px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 1%
+      }
+
+      input[type="submit"] {
+        background-color: rgb(25, 162, 205);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 20px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 1%
+      }
+
+      input[type="submit"]:hover {
+        background-color: #1287b1;
+      }
+
+      @media screen and (max-width: 768px) {
+        .container {
+          width: 70%;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+
+        textarea,
+        input[type="text"] {
+          font-size: 14px;
+        }
+
+        input[type="submit"] {
+          font-size: 16px;
+        }
+
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Add a Hackathons <i class="fas fa-question-circle"></i></h1>
+    <form action="/add-hackathon" method="POST">
+
+      <label for="textarea1">Name of Hackathon</label>
+      <input type="text" id="teamMembers" name="teamMembers">
+      <label for="textarea2">Details/Description (Max 120 words)</label>
+      <textarea name="project_detail" id="textarea2" style="width: 842px; height: 81px;"></textarea>
+      
+      
+      <div id="" style="
+  display: flex;
+  width: 100%;
+">
+
+      <div style="
+  width: 48%;
+">
+        <label for="projectType">Location</label>
+        <input type="text" id="projectType" name="projectType" style="
+  margin-left: 0%;
+">
+      </div>
+      <div style="
+  width: 48%;
+">
+        <label for="projectType" style="
+  margin-left: 4%;
+">Fees</label>
+        <input type="text" id="projectType" name="projectType">
+      </div>
+    </div>
+      <div id="" style="
+  display: flex;
+    width: 100%;
+    gap: 29px;
+    justify-content: space-between;
+    /* gap: 9rem; */
+    flex-direction: row
+">
+
+      <div style="
+  width: 20%;
+">
+        <label for="projectType">Ist prize</label>
+        <input type="text" id="projectType" name="projectType" style="
+  margin-left: 0%;
+">
+      </div>
+      <div style="
+  width: 20%;
+">
+        <label for="projectType">second prize</label>
+        <input type="text" id="projectType" name="projectType" style="
+">
+      </div><div style="
+  width: 20%;
+">
+        <label for="projectType" style="
+  margin-left: 4%;
+">third prize</label>
+        <input type="text" id="projectType" name="projectType">
+      </div>
+    </div><input id="button" type="button" value="Post">
+    </form>
+  </div>
+  </body>
+</html>
+<script>
+
+//heading validation
+
+// const validate_heading=(input)=>{
+//   if(input.value<41){
+//     return true;
+//   }return false;
+// };
+
+// const validate_project_dsc=(input)=>{
+//   if(input.value>61){
+//     return true;
+//   }return false;
+// };
+
+
+ 
+</script>

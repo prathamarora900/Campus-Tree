@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+    <title>Team Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: rgb(25, 162, 205);
+        font-family: Arial, sans-serif;
+      }
+      textarea {
+     
+}
+
+      .container {
+        width: 50%;
+        margin: 5% auto 0;
+        background-color: white;
+        padding: 30px;
+        text-align: center;
+        border-radius: 10px;
+      }
+
+      h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      label {
+        font-size: 20px;
+        margin-bottom: 10px;
+        display: block;
+        text-align: left;
+        width: 100%;
+      }
+
+      textarea,
+      input[type="text"] {
+        font-size: 16px;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        width: 100%;
+        box-sizing: border-box;
+        border: 3px solid rgb(25,162,205);
+    margin: 16px;
+  padding: 5px;
+  box-sizing: border-box;
+      }
+
+      textarea {
+        height: 100px;
+        max-width: 100%;
+        max-height: 200px;
+      }
+
+      input[type="button"] {
+        background-color: rgb(25, 162, 205);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 20px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      input[type="submit"] {
+        background-color: rgb(25, 162, 205);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 20px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #1287b1;
+      }
+
+      @media screen and (max-width: 768px) {
+        .container {
+          width: 70%;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+
+        textarea,
+        input[type="text"] {
+          font-size: 14px;
+        }
+
+        input[type="submit"] {
+          font-size: 16px;
+        }
+
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <h1>Need a Team <i class="fas fa-question-circle"></i></h1>
+      <form action="/team" method="POST">
+
+        <label for="textarea1">Heading (Max 40 words)</label>
+        <textarea name="heading" id="textarea1" ></textarea>
+        <label for="textarea2">Project Details/Description (Max 60 words)</label>
+        <textarea name="project_detail" id="textarea2" ></textarea>
+        <label for="teamMembers">Number of Team Members</label>
+        <input type="text"  id="teamMembers" name="teamMembers" />
+        <label for="projectType">Project Type</label>
+        <input type="text" id="projectType" name="projectType" />
+        <input id="button" type="button" value="Post" />
+      </form>
+    </div>
+  </body>
+</html>
+<script>
+  let textarea1=document.getElementById("textarea1");
+  let textarea2=document.getElementById("textarea2");
+  let teamMembers=document.getElementById("teamMembers");
+  let projectType=document.getElementById("projectType");
+let submit_button=document.getElementById("button");
+//heading validation
+
+// const validate_heading=(input)=>{
+//   if(input.value<41){
+//     return true;
+//   }return false;
+// };
+
+// const validate_project_dsc=(input)=>{
+//   if(input.value>61){
+//     return true;
+//   }return false;
+// };
+
+
+  let button=document.getElementById("button");
+  button.addEventListener("click",()=>{
+if(textarea1.value!=""){
+if(textarea1.value!="" ){
+if(teamMembers.value!="" && projectType!=""){
+submit_button.type="submit";
+}else{
+  alert("Fill all details");
+}
+}else{
+  alert("Fill all details");
+}
+}
+
+
+else{
+  alert("Fill all details");
+}
+  });
+
+  textarea1.addEventListener("keypress",(e)=>{if(e.keyCode==32 && textarea1.value==""){e.preventDefault(); return false;}})
+  textarea2.addEventListener("keypress",(e)=>{if(e.keyCode==32 && textarea2.value==""){e.preventDefault(); return false;}})
+  projectType.addEventListener("keypress",(e)=>{if(e.keyCode==32 && textarea1.value==""){e.preventDefault(); return false;}})
+  teamMembers.addEventListener("keypress",(e)=>{if(e.keyCode>48 && e.keyCode<58){console.log("ikak"); return true; }  else{e.preventDefault();return false;} });
+</script>
