@@ -66,4 +66,4 @@ registerSchema.pre('save', async function save(next) {
     }
   });
 
-module.exports=new mongoose.model("registers_text",registerSchema);
+module.exports=new mongoose.model("registers_dummy",registerSchema);

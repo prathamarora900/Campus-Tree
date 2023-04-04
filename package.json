@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "node index.js",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -19,7 +23,9 @@
     "logger": "0.0.1",
     "mongoose": "^6.8.2",
     "nodemailer": "^6.9.1",
-    "nodemon": "^2.0.22",
+    "nodemon": "^2.0.20",
     "socket.io": "^4.6.1"
   }
 }
+
+

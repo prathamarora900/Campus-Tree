@@ -1,13 +1,23 @@
+//api's =
+/*
+/register (get )== render register page
+/login  (get)  == render login page
+/register(post) 
+/login (post)
+/otp(get)
+/otp (post)
+/logout (get)
+
+*/
+
+
+
+
 const router=require("express").Router();
-const cookieParser=require("cookie-parser");
 const register=require("../models/registers");
 const sendmail=require("../modules/sendmail");
 const bcrypt=require("bcrypt");
-//demo page 
 
-/*router.get("/",(req,res)=>{
-    res.render("main");
-});*/
 
 
 router.get("/register",(req,res)=>{
@@ -47,7 +57,7 @@ router.post("/register",async(req,res)=>{
         if(find_user){
             res.render("register",{status:"false",message:"Email Exist",title:"Email",user:user});
             
-           console.log(find_user);
+           //console.log(find_user);
         }
         else if(find_user_name){
             res.render("register",{status:"false",message:"Not a unique username",title:"username",user:user});
@@ -64,7 +74,7 @@ router.post("/register",async(req,res)=>{
             res.app.set("otp",otp);
                res.app.set("user",user);
                //res.send("Okay");
-               console.log("okay");
+              // console.log("okay");
             res.redirect("/otp");
         }
            else{
@@ -102,16 +112,16 @@ router.post("/login",async(req,res)=>{
     const {user_id,password}=req.body;
     //console.log(email,password);
     const user=await register.findOne({user_id:user_id});
-     console.log(user);
+     //console.log(user);
     const input_user={user_id:user_id,
     password:password};
     if(await !user){
-        console.log("not found");
+        //console.log("not found");
         res.render("login",{status:"false",message:"No user found" ,title:"Not_found",user:input_user});
     }else{
         //match password
         const matched=await bcrypt.compare(password,user.password);
-        console.log(matched);
+       // console.log(matched);
         if(matched){
             res.cookie("id",user._id);
             res.cookie("user_id",user.user_id);
@@ -149,7 +159,7 @@ else{
 }
 }
 else{
-    console.log("jhey");
+    //console.log("jhey");
     res.redirect("/register");
 }
 });
@@ -174,10 +184,10 @@ router.post("/otp",async(req,res)=>{
      });
      
     data=await data.save();
-     console.log(data);
+     //console.log(data);
     // res.cookie("Token_id",data._id);
     if(data){
-        console.log(req.cookies.id); 
+        //console.log(req.cookies.id); 
         res.cookie("id",data._id);
         res.cookie("user_id",data.user_id);
         res.cookie("name",data.full_name);
@@ -188,7 +198,7 @@ router.post("/otp",async(req,res)=>{
         //write fronetne for that
 
     }else{
-        console.log("hello");
+        //console.log("hello");
         res.render("otp",{status:false,message:"Something went wrong",title:"Internal",show_message:true});
     }
           
@@ -209,20 +219,21 @@ router.post("/otp",async(req,res)=>{
          }
 })
 
+router.get("/logout",(req,res)=>{
+    //unset cookies to empty string 
+    res.cookie("id","");
+    res.cookie("user_id","");
+    res.cookie("name","");
+    res.redirect("/register");
 
+
+})
 
 module.exports=router;
 
-// router.get("/signup2",(req,res)=>{
-//     res.render("signup2");
-// })
 
 
 
 
 
-//bcrypt == wala 
-//json web tken== add(story wala kaam )
-//page
-//footer
-//
+

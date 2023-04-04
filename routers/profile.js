@@ -1,3 +1,19 @@
+/*
+routes
+/myprofile (get) == for rendering user's own profile
+/edit-profile(get)  ==rendering page where user can update additional fields
+/edit-profile(post)   === recive body and update information in db
+/user/:"user_id"(get)     ==specific user
+/upload_profile(post)   ==uploading profile image
+/other_profile(post )  ==show other profile in db
+/team (get)
+/team(post)
+/add_hackathon(get)
+
+/all_user (get)
+
+
+*/
 
 const profile=require("express").Router();
 const register=require("../models/registers");
@@ -10,10 +26,39 @@ cloudinary.config({
     api_secret: process.env.api_secret
   });
 
+
+  profile.get("/myprofile",auth,async(req,res)=>{     //rending my profile
+try{
+
+
+    const user=await register.findOne({_id:req.cookies.id});
+     if(user){
+         //console.log(user.about);
+         res.status(200).render("myprofile",{interest:user.interest,about:user.about,fullname:user.full_name ,userid:user.user_id,email:user.email,city:user.city,college:user.college,profile_image:user.profile_image});
+     }else{
+         //displaying error page
+         res.send("error");
+     }
+}catch{
+    res.send("Something went wrong...");
+
+    //displaying error page
+
+}
+    
+   
+});
+
+
+
+
+
+
+
   profile.get("/edit-profile",auth,async(req,res)=>{
     try{ 
   
-      console.log(req.body);
+     // console.log(req.body);
          const user=await register.findOne({_id:req.cookies.id});
       if(user){
           //console.log(user);
@@ -34,21 +79,24 @@ cloudinary.config({
   res.render("edit_profile",{data:basic_info});
       }}catch(err){
           console.log(err);
+          res.send("Error");
+
+          //error page
       };
   });
+
+
+
 
   profile.post("/edit_profile",async(req,res)=>{
 
     try{
-        console.log(req.body);
+       // console.log(req.body);
        // console.log(req.body.fullname);
        const {fullname,userid,email,interest,aboutInput,city,college}=req.body;
 //console.log(req.body);
 
 
-
-
-//console.log(interest_arr);
        const update={
           full_name:fullname,
           user_id:userid,
@@ -60,43 +108,24 @@ cloudinary.config({
           
        }
       // console.log(update);
-     const u= await register.findOneAndUpdate({_id:req.cookies.id}, update, {
+     const u= await register.findOneAndUpdate({_id:req.cookies.id}, update, {});
 
-    });
-
-    console.log(u);
+    //console.log(u);
 
     res.redirect("/myprofile")
-   // console.log(u);
-    //await register.save();
+   
     
       
 
     }catch(err){
         console.log(err);
+        res.send("Something went wrong");
+        //error page
     }
 //console.log(req.body);
 })
 
-  profile.get("/myprofile",auth,async(req,res)=>{     //rending my profile
-
-    const user=await register.findOne({_id:req.cookies.id});
-     if(user){
-         console.log(user.about);
-        //  let basic_info={
-        //      fullname:user.full_name,
-        //      user_id:user.user_id,
-        //      college:user.college,
-        //      city:user.city,
-        //      email:user.email
-        //  }
-         res.status(200).render("myprofile",{interest:user.interest,about:user.about,fullname:user.full_name ,userid:user.user_id,email:user.email,city:user.city,college:user.college,profile_image:user.profile_image});
-     }else{
-         res.send("error");
-     }
-   
-});
-
+  
 
 
 
@@ -107,66 +136,34 @@ cloudinary.config({
 
 //specific user
 
-profile.get("/user/:user_id",async(req,res)=>{
-    const user=await register.findOne({user_id:req.params['user_id']}); 
-    if(user){
-        res.render("otherprofile",{interest:user.interest,about:user.about,fullname:user.full_name ,userid:user.user_id,email:user.email,city:user.city,college:user.college,profile_image:user.profile_image});
-    }else{
-        res.send("error");
+profile.get("/user/:user_id",auth,async(req,res)=>{
+    try{
+        const user=await register.findOne({user_id:req.params['user_id']}); 
+        if(user){
+            res.render("otherprofile",{interest:user.interest,about:user.about,fullname:user.full_name ,userid:user.user_id,email:user.email,city:user.city,college:user.college,profile_image:user.profile_image});
+        }else{
+            res.send("error");
+        }
+    }catch(err){
+        console.log(err);
+        //displaying error page
+        res.send("Something went wrong");
     }
+    
 })
 
 
 
 
 
-profile.post("/upload_cover",async(req,res)=>{    //upload story
-  
-    
-    //console.log(req.body);
-//console.log(req.body.client_url);
 
-//object destructing
-const url=req.body;
-
-    const qq = cloudinary.uploader.upload(url.client_url, {public_id: Date.now()});
-qq.then(async(data)=>{
-
-
-//update db 
-
-//find the user
-const update={cover_image:data.secure_url};
-const user=await register.findOneAndUpdate({_id:req.cookies.id}, update, {
-
-});
-
-if(user){
-    
-    res.send({"success":true,"image_url":data.secure_url});
-
-}
-else{
-    res.send({"status":false,"message":"Upload failed","title":"Internal"});
-}
-
-}).catch((err)=>{console.log(err)
-
-    res.send({"status":false,"message":"Upload failed","title":"Internal"});
-
-});
-
-
-
-    
-});
 
 profile.post("/upload_profile",async(req,res)=>{
 
     const url=req.body;
     const qe = cloudinary.uploader.upload(url.url_data, {public_id: Date.now()});
 qe.then(async(data)=>{
-console.log(data.secure_url);
+//console.log(data.secure_url);
 
 //update db 
 
@@ -177,7 +174,7 @@ const user=await register.findOneAndUpdate({_id:req.cookies.id}, update, {
 });
 
 if(user){
-    console.log(user);
+    //console.log(user);
     res.send({"success":true,"image_url":data.secure_url});
     
 }
@@ -191,29 +188,17 @@ else{
 
 
 })
-// profile.get("/profile",auth,async(req,res)=>{
-//     try{
-//     const otherUsers=await register.find({});
-//      console.log(otherUsers);
-//       // console.log(auth);
-// console.log(req.data);
-//         res.render("profile",{user:req.data,otherUsers:otherUsers});
-//     }
-//    catch(err){
-//        console.log(err);
-//        res.send(err);
-//    } 
-// })
 
 
 
 
 
 
+//show other user profile  (in boxes)
 profile.post("/other_profile",auth,async(req,res)=>{
     try{
 const user=await register.find({_id:{$ne:req.cookies.id}});
-console.log(user);
+//console.log(user);
 if(user){
 let data=[];
 
@@ -229,9 +214,7 @@ res.send(data);
 
 });
 
-profile.get("/allUser",(req,res)=>{
-res.render("all_user");
-})
+
 
 
 
@@ -245,7 +228,7 @@ profile.get("/team",(req,res)=>{
 });
 profile.post("/team",async(req,res)=>{
     try{
-        console.log("helllo");
+        //console.log("helllo");
        const {heading,project_detail,teamMembers,projectType}=req.body;
        const user=await team.findOne({user_id:req.cookies.user_id});
 if(user){
@@ -275,7 +258,7 @@ if(user){
 }
 
 
-console.log(user);
+//console.log(user);
 res.redirect("/story");
     }catch(err){
         console.log(err);
@@ -284,9 +267,26 @@ res.redirect("/story");
     }
 });
 
-profile.get("/add-hackathon",(req,res)=>{
+profile.get("/add_hackathon",auth,(req,res)=>{
     res.render("add_hackathon");
-})
+});
 
 
+
+//add post of add-hackathon
+
+profile.get("/all_user",auth,(req,res)=>{
+    try{
+    res.render("all_user");
+    
+    }catch(err){
+    console.log(err);
+    res.send("Something went wrong");
+
+    //error page
+    }
+    })
+
+
+// profile.post("/add-hack")
 module.exports=profile;

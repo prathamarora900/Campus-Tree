@@ -21,4 +21,4 @@ type:String
 });
 
 
-module.exports=new mongoose.model("team",TeamSchema );
+module.exports=new mongoose.model("team_dummy",TeamSchema );

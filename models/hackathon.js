@@ -27,4 +27,4 @@ type:Number
 
 
 
-module.exports=new mongoose.model("hackathon",hackathonSchema);
+module.exports=new mongoose.model("hackathon_dummy",hackathonSchema);

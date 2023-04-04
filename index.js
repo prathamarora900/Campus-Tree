@@ -293,7 +293,7 @@ console.log(user);
 res.send({name:user.name});
 
 }catch(err){
-
+console.log("Error");
 }
 
 })
@@ -301,9 +301,7 @@ res.send({name:user.name});
 
 
 /*
-"test": "node index.js",
-    "dev": "nodemon index.js",
-    "start": "node index.js"
+
 */
 
 
